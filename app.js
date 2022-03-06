@@ -18,15 +18,16 @@ let sliders = [];
 const KEY = "15674931-a9d714b6e9d654524df198e00&q";
 
 // SPINER ADDED
-// const spinerAdd = (spiner) => {
-//   document.getElementById("asdf").style.display = spiner;
-// };
+const spinerAdd = (spiner) => {
+  document.getElementById("spiner").style.display = spiner;
+};
 // show images
 const showImages = (images) => {
   if (images[0] === undefined) {
     imagesArea.style.display = "none";
     resultNotAlert.style.display = "block";
     gallery.textContent = "";
+    spinerAdd("none");
     return resultNotAlert;
   } else {
     resultNotAlert.style.display = "none";
@@ -39,6 +40,7 @@ const showImages = (images) => {
       div.className = "col-lg-3 col-md-4 col-xs-6 img-item mb-2";
       div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
       gallery.appendChild(div);
+      spinerAdd("none");
     });
   }
 };
@@ -72,6 +74,7 @@ const createSlider = () => {
     return;
   }
   // crate slider previous next area
+
   sliderContainer.innerHTML = "";
   const prevNext = document.createElement("div");
   prevNext.className =
@@ -80,8 +83,8 @@ const createSlider = () => {
   <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
   <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
   `;
-
   sliderContainer.appendChild(prevNext);
+  spinerAdd("none");
   document.querySelector(".main").style.display = "block";
   // hide image aria
 
@@ -134,6 +137,7 @@ const changeSlide = (index) => {
 };
 
 searchBtn.addEventListener("click", function () {
+  spinerAdd("block");
   document.querySelector(".main").style.display = "none";
   clearInterval(timer);
   const search = document.getElementById("search");
@@ -141,6 +145,7 @@ searchBtn.addEventListener("click", function () {
     imagesArea.style.display = "none";
     validTextAlert.style.display = "block";
     resultNotAlert.style.display = "none";
+    spinerAdd("none");
     return validTextAlert;
   } else {
     getImages(search.value);
